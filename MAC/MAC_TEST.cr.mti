@@ -1,0 +1,43 @@
+C:/EE495/TPU/MAC/MAC.v {1 {vlog -work work -stats=none C:/EE495/TPU/MAC/MAC.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module MAC
+
+Top level modules:
+	MAC
+
+} {} {}} C:/EE495/TPU/MAC/Adder_16bit.v {1 {vlog -work work -stats=none C:/EE495/TPU/MAC/Adder_16bit.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Adder_16bit
+
+Top level modules:
+	Adder_16bit
+
+} {} {}} C:/EE495/TPU/MAC/Multiplier_8bit.v {1 {vlog -work work -stats=none C:/EE495/TPU/MAC/Multiplier_8bit.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Multiplier_8bit
+
+Top level modules:
+	Multiplier_8bit
+
+} {} {}} C:/EE495/TPU/MAC/TB_MAC.v {1 {vlog -work work -stats=none C:/EE495/TPU/MAC/TB_MAC.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module TB_MAC
+
+Top level modules:
+	TB_MAC
+
+} {} {}} C:/EE495/TPU/MAC/FullAdder.v {1 {vlog -work work -stats=none C:/EE495/TPU/MAC/FullAdder.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module FullAdder
+
+Top level modules:
+	FullAdder
+
+} {} {}} C:/EE495/TPU/MAC/Adder_32bit.v {1 {vlog -work work -stats=none C:/EE495/TPU/MAC/Adder_32bit.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module Adder_32bit
+
+Top level modules:
+	Adder_32bit
+
+} {} {}}

@@ -1,0 +1,227 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/20.1
+vAdder_16bit
+Z0 !s110 1672567169
+!i10b 1
+!s100 @Qo99R7iao7[WZRdEJEQM1
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I[=56hmU7:;XU6bHejIE`N0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 dC:/EE495/TPU/MAC
+w1672134813
+8C:/EE495/TPU/MAC/Adder_16bit.v
+FC:/EE495/TPU/MAC/Adder_16bit.v
+!i122 194
+Z4 L0 1 28
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1672567169.000000
+!s107 C:/EE495/TPU/MAC/Adder_16bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/Adder_16bit.v|
+!i113 1
+Z7 o-work work
+Z8 tCvgOpt 0
+n@adder_16bit
+vAdder_32bit
+R0
+!i10b 1
+!s100 bWoQ:o=z@@7VnRRh0zI433
+R1
+IWNHSZHz3]Qj>EXg82SBZ53
+R2
+R3
+w1672209358
+8C:/EE495/TPU/MAC/Adder_32bit.v
+FC:/EE495/TPU/MAC/Adder_32bit.v
+!i122 193
+R4
+R5
+r1
+!s85 0
+31
+Z9 !s108 1672567168.000000
+!s107 C:/EE495/TPU/MAC/Adder_32bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/Adder_32bit.v|
+!i113 1
+R7
+R8
+n@adder_32bit
+vAdder_8bit
+Z10 !s110 1672134943
+!i10b 1
+!s100 fXcmkQlaFD?@Ka:8SiH1;3
+R1
+IhPWB_C35LQU0?lCCkAY]K3
+R2
+R3
+w1672118341
+8C:/EE495/TPU/MAC/Adder_8bit.v
+FC:/EE495/TPU/MAC/Adder_8bit.v
+!i122 95
+L0 1 78
+R5
+r1
+!s85 0
+31
+Z11 !s108 1672134943.000000
+!s107 C:/EE495/TPU/MAC/Adder_8bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/Adder_8bit.v|
+!i113 1
+R7
+R8
+n@adder_8bit
+vFullAdder
+R0
+!i10b 1
+!s100 EPn<n;]z;=T4@lP474E0E1
+R1
+Il;J5GX<Yl<edAK4LIE7I^1
+R2
+R3
+w1672038195
+8C:/EE495/TPU/MAC/FullAdder.v
+FC:/EE495/TPU/MAC/FullAdder.v
+!i122 195
+L0 1 19
+R5
+r1
+!s85 0
+31
+R6
+!s107 C:/EE495/TPU/MAC/FullAdder.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/FullAdder.v|
+!i113 1
+R7
+R8
+n@full@adder
+vMAC
+Z12 !s110 1672567168
+!i10b 1
+!s100 2giMj[bIK=G7Mg@b[WE[30
+R1
+IiQ_R;@5kCQ7fISFJ0cjTc3
+R2
+R3
+w1672566534
+8C:/EE495/TPU/MAC/MAC.v
+FC:/EE495/TPU/MAC/MAC.v
+!i122 190
+L0 3 98
+R5
+r1
+!s85 0
+31
+R9
+!s107 C:/EE495/TPU/MAC/MAC.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/MAC.v|
+!i113 1
+R7
+R8
+n@m@a@c
+vMultiplier_8bit
+R12
+!i10b 1
+!s100 YERLB[`1<0m?6gJmZkSBI2
+R1
+Iib3;?3G7Z=XLHS4W^T=083
+R2
+R3
+w1672209884
+8C:/EE495/TPU/MAC/Multiplier_8bit.v
+FC:/EE495/TPU/MAC/Multiplier_8bit.v
+!i122 192
+L0 1 213
+R5
+r1
+!s85 0
+31
+R9
+!s107 C:/EE495/TPU/MAC/Multiplier_8bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/Multiplier_8bit.v|
+!i113 1
+R7
+R8
+n@multiplier_8bit
+vTB_Adder
+R10
+!i10b 1
+!s100 1?NjTkRhkL51<PzJRA_^32
+R1
+ID0ke6ghUiW]:gdURWjeiO2
+R2
+R3
+w1672118952
+8C:/EE495/TPU/MAC/TB_Adder.v
+FC:/EE495/TPU/MAC/TB_Adder.v
+!i122 97
+L0 3 43
+R5
+r1
+!s85 0
+31
+R11
+!s107 C:/EE495/TPU/MAC/TB_Adder.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/TB_Adder.v|
+!i113 1
+R7
+R8
+n@t@b_@adder
+vTB_MAC
+R12
+!i10b 1
+!s100 <dBeV08?<WKZ8Qfn[4_j^0
+R1
+I:J=A:1>h3OORldBb]Fh@J3
+R2
+R3
+w1672566954
+8C:/EE495/TPU/MAC/TB_MAC.v
+FC:/EE495/TPU/MAC/TB_MAC.v
+!i122 191
+L0 3 136
+R5
+r1
+!s85 0
+31
+R9
+!s107 C:/EE495/TPU/MAC/TB_MAC.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/TB_MAC.v|
+!i113 1
+R7
+R8
+n@t@b_@m@a@c
+vTB_Multiplier
+!s110 1672203049
+!i10b 1
+!s100 UP@VFGK`ddOCiTbX8XY=H0
+R1
+IKV1f1QOfl?<8PSY7]8j`<3
+R2
+R3
+w1672203043
+8C:/EE495/TPU/MAC/TB_Multiplier.v
+FC:/EE495/TPU/MAC/TB_Multiplier.v
+!i122 107
+L0 3 40
+R5
+r1
+!s85 0
+31
+!s108 1672203049.000000
+!s107 C:/EE495/TPU/MAC/TB_Multiplier.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/EE495/TPU/MAC/TB_Multiplier.v|
+!i113 1
+R7
+R8
+n@t@b_@multiplier
