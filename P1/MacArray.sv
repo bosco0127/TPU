@@ -33,5 +33,70 @@ module MacArray
 
     // your code here
     
+    // Internal Wire
+    logic [W_BITWIDTH]     w_internal_wire     [MAC_ROW-1:0][MAC_COL-1:0];
+    logic [IFMAP_BITWIDTH] ifmap_internal_wire [MAC_ROW-1:0][MAC_COL-1:0];
+    logic [OFMAP_BITWIDTH] ofmap_internal_wire [MAC_ROW-1:0][MAC_COL-1:0];
+
+    // Generation Variable
+    genvar row_idx;
+    genvar col_idx;
+
+    // MAC array generation
+    generate
+        for (row_idx = 0; row_idx < MAC_ROW; row_idx = row_idx + 1) begin : MAC_Array_Row_gen
+            for (col_idx = 0; col_idx < MAC_COL; col_idx = col_idx + 1) begin : MAC_Array_Col_gen
+                if (row_idx == 0) begin
+                    if (col_idx == 0) begin
+                        MAC MAC_element00 (
+                            .clk (clk),
+                            .rstn (rstn),
+                            .w_data_in (w_data_in[col_idx]),
+                            .ifmap_data_in (ifmap_data_in[row_idx]),
+                            .MAC_data_in (0),
+                            .w_data_out (w_internal_wire[row_idx][col_idx]),
+                            .ifmap_data_out (ifmap_internal_wire[row_idx][col_idx]),
+                            .MAC_data_out (ofmap_internal_wire[row_idx][col_idx])
+                        );
+                    end else begin
+                        MAC MAC_element0X (
+                            .clk (clk),
+                            .rstn (rstn),
+                            .w_data_in (w_data_in[col_idx]),
+                            .ifmap_data_in (ifmap_internal_wire[row_idx][col_idx-1]),
+                            .MAC_data_in (0),
+                            .w_data_out (w_internal_wire[row_idx][col_idx]),
+                            .ifmap_data_out (ifmap_internal_wire[row_idx][col_idx]),
+                            .MAC_data_out (ofmap_internal_wire[row_idx][col_idx])
+                        );
+                    end
+                end else begin
+                    if (col_idx == 0) begin
+                        MAC MAC_elementX0 (
+                            .clk (clk),
+                            .rstn (rstn),
+                            .w_data_in (w_internal_wire[row_idx-1][col_idx]),
+                            .ifmap_data_in (ifmap_data_in[row_idx]),
+                            .MAC_data_in (0),
+                            .w_data_out (w_internal_wire[row_idx][col_idx]),
+                            .ifmap_data_out (ifmap_internal_wire[row_idx][col_idx]),
+                            .MAC_data_out (ofmap_internal_wire[row_idx][col_idx])
+                        );
+                    end else begin
+                        MAC MAC_elementXX (
+                            .clk (clk),
+                            .rstn (rstn),
+                            .w_data_in (w_internal_wire[row_idx-1][col_idx]),
+                            .ifmap_data_in (ifmap_internal_wire[row_idx][col_idx-1]),
+                            .MAC_data_in (0),
+                            .w_data_out (w_internal_wire[row_idx][col_idx]),
+                            .ifmap_data_out (ifmap_internal_wire[row_idx][col_idx]),
+                            .MAC_data_out (ofmap_internal_wire[row_idx][col_idx])
+                        );
+                    end
+                end
+            end
+        end
+    endgenerate
 
 endmodule
