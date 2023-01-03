@@ -7,7 +7,7 @@
 
 `timescale 1 ns / 1 ps
 
-// `define DEBUG
+`define DEBUG
 
 module tb_MacArray;
 
@@ -224,11 +224,11 @@ module tb_MacArray;
     generate
         for (j = 0; j < MAC_COL; j++) begin : loop_w_of
             `ifdef DEBUG
-            localparam W_FILE_NAME                  = {"/path/to/data/", "debug_weight", decimal_to_ascii(j), ".hex"};
-            localparam OFMAP_FILE_NAME              = {"/path/to/data/", "debug_ofmap", decimal_to_ascii(j), ".hex"};
+            localparam W_FILE_NAME                  = {"C:\\EE495\\TPU\\P1\\data\\", "debug_weight", decimal_to_ascii(j), ".hex"};
+            localparam OFMAP_FILE_NAME              = {"C:\\EE495\\TPU\\P1\\data\\", "debug_ofmap", decimal_to_ascii(j), ".hex"};
             `else
-            localparam W_FILE_NAME                  = {"/path/to/data/", "weight", decimal_to_ascii(j), ".hex"};
-            localparam OFMAP_FILE_NAME              = {"/path/to/data/", "ofmap", decimal_to_ascii(j), ".hex"};
+            localparam W_FILE_NAME                  = {"C:\\EE495\\TPU\\P1\\data\\", "weight", decimal_to_ascii(j), ".hex"};
+            localparam OFMAP_FILE_NAME              = {"C:\\EE495\\TPU\\P1\\data\\", "ofmap", decimal_to_ascii(j), ".hex"};
             `endif
 
             initial begin
@@ -239,9 +239,9 @@ module tb_MacArray;
 
         for (k = 0; k < MAC_ROW; k++) begin : loop_if
             `ifdef DEBUG
-            localparam IFMAP_FILE_NAME = {"/path/to/data/", "debug_ifmap", decimal_to_ascii(k), ".hex"};
+            localparam IFMAP_FILE_NAME = {"C:\\EE495\\TPU\\P1\\data\\", "debug_ifmap", decimal_to_ascii(k), ".hex"};
             `else
-            localparam IFMAP_FILE_NAME = {"/path/to/data/", "ifmap", decimal_to_ascii(k), ".hex"};
+            localparam IFMAP_FILE_NAME = {"C:\\EE495\\TPU\\P1\\data\\", "ifmap", decimal_to_ascii(k), ".hex"};
             `endif
 
             initial begin
