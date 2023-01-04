@@ -9,15 +9,19 @@
 
 //`define DEBUG
 
+`define SHORT
+
 module tb_MacArray;
 
     parameter MAC_ROW                               = 16;
     parameter MAC_COL                               = 16;
-
+    parameter SHORT_NUM                             = 100;
 
     parameter IFMAP_BITWIDTH                        = 16;
     `ifdef DEBUG
     parameter IFMAP_NUM                             = 10;
+    `elsif SHORT
+    parameter IFMAP_NUM                             = SHORT_NUM;
     `else
     parameter IFMAP_NUM                             = 1024;
     `endif
@@ -29,6 +33,8 @@ module tb_MacArray;
     parameter OFMAP_BITWIDTH                        = 32;
     `ifdef DEBUG
     parameter OFMAP_NUM                             = 10;
+    `elsif SHORT
+    parameter OFMAP_NUM                             = SHORT_NUM;
     `else
     parameter OFMAP_NUM                             = 1024;
     `endif
@@ -226,6 +232,9 @@ module tb_MacArray;
             `ifdef DEBUG
             localparam W_FILE_NAME                  = {"C:\\EE495\\TPU\\P1\\data\\", "debug_weight", decimal_to_ascii(j), ".hex"};
             localparam OFMAP_FILE_NAME              = {"C:\\EE495\\TPU\\P1\\data\\", "debug_ofmap", decimal_to_ascii(j), ".hex"};
+            `elsif SHORT
+            localparam W_FILE_NAME                  = {"C:\\EE495\\TPU\\P1\\data\\", "weight", decimal_to_ascii(j), ".hex"};
+            localparam OFMAP_FILE_NAME              = {"C:\\EE495\\TPU\\P1\\data\\", "short_ofmap", decimal_to_ascii(j), ".hex"};
             `else
             localparam W_FILE_NAME                  = {"C:\\EE495\\TPU\\P1\\data\\", "weight", decimal_to_ascii(j), ".hex"};
             localparam OFMAP_FILE_NAME              = {"C:\\EE495\\TPU\\P1\\data\\", "ofmap", decimal_to_ascii(j), ".hex"};
@@ -240,6 +249,8 @@ module tb_MacArray;
         for (k = 0; k < MAC_ROW; k++) begin : loop_if
             `ifdef DEBUG
             localparam IFMAP_FILE_NAME = {"C:\\EE495\\TPU\\P1\\data\\", "debug_ifmap", decimal_to_ascii(k), ".hex"};
+            `elsif SHORT
+            localparam IFMAP_FILE_NAME = {"C:\\EE495\\TPU\\P1\\data\\", "short_ifmap", decimal_to_ascii(k), ".hex"};
             `else
             localparam IFMAP_FILE_NAME = {"C:\\EE495\\TPU\\P1\\data\\", "ifmap", decimal_to_ascii(k), ".hex"};
             `endif
