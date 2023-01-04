@@ -65,7 +65,7 @@ module MacArray
                             .w_enable_in (w_enable_in),
                             .ifmap_start_in (ifmap_start_in),
                             .ifmap_enable_in (ifmap_enable_in[row_idx]),
-                            .MAC_valid_in (ifmap_enable_in[row_idx]),
+                            .MAC_valid_in (1'b1),
                             .w_data_in (w_data_in[col_idx]),
                             .ifmap_data_in (ifmap_data_in[row_idx]),
                             .MAC_data_in (0),
@@ -83,7 +83,7 @@ module MacArray
                             .w_enable_in (w_enable_in),
                             .ifmap_start_in (ifmap_start_in),
                             .ifmap_enable_in (ifmap_internal_enable_wire[row_idx][col_idx-1]),
-                            .MAC_valid_in (ifmap_internal_enable_wire[row_idx][col_idx-1]),
+                            .MAC_valid_in (1'b1),
                             .w_data_in (w_data_in[col_idx]),
                             .ifmap_data_in (ifmap_internal_wire[row_idx][col_idx-1]),
                             .MAC_data_in (0),
@@ -136,5 +136,24 @@ module MacArray
             end
         end
     endgenerate
+
+    int i,j;
+
+    always_ff @ (posedge clk) begin
+        if (|ifmap_enable_in | |ofmap_valid_out) begin
+            $display("***********************************");
+            for (i = 0; i < MAC_ROW; i++) begin
+                $display("%b %b%b%b%b%b%b%b%b%b%b%b%b%b%b%b%b %b%b%b%b%b%b%b%b%b%b%b%b%b%b%b%b",ifmap_enable_in[i],ifmap_internal_enable_wire[i][0],ifmap_internal_enable_wire[i][1]
+                ,ifmap_internal_enable_wire[i][2],ifmap_internal_enable_wire[i][3],ifmap_internal_enable_wire[i][4],ifmap_internal_enable_wire[i][5]
+                ,ifmap_internal_enable_wire[i][6],ifmap_internal_enable_wire[i][7],ifmap_internal_enable_wire[i][8],ifmap_internal_enable_wire[i][9]
+                ,ifmap_internal_enable_wire[i][10],ifmap_internal_enable_wire[i][11],ifmap_internal_enable_wire[i][12],ifmap_internal_enable_wire[i][13]
+                ,ifmap_internal_enable_wire[i][14],ifmap_internal_enable_wire[i][15],
+                ofmap_internal_valid_wire[i][0],ofmap_internal_valid_wire[i][1],ofmap_internal_valid_wire[i][2],ofmap_internal_valid_wire[i][3]
+                ,ofmap_internal_valid_wire[i][4],ofmap_internal_valid_wire[i][5],ofmap_internal_valid_wire[i][6],ofmap_internal_valid_wire[i][7]
+                ,ofmap_internal_valid_wire[i][8],ofmap_internal_valid_wire[i][9],ofmap_internal_valid_wire[i][10],ofmap_internal_valid_wire[i][11]
+                ,ofmap_internal_valid_wire[i][12],ofmap_internal_valid_wire[i][13],ofmap_internal_valid_wire[i][14],ofmap_internal_valid_wire[i][15]);
+            end
+        end
+    end
 
 endmodule

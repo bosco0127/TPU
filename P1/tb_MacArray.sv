@@ -7,7 +7,7 @@
 
 `timescale 1 ns / 1 ps
 
-`define DEBUG
+//`define DEBUG
 
 module tb_MacArray;
 
@@ -49,17 +49,17 @@ module tb_MacArray;
     logic                                           w_prefetch_in;
     logic                                           w_enable_in;
     logic [W_BITWIDTH-1:0]                          w_data[MAC_COL-1:0][MAC_ROW-1:0];
-    logic [MAC_COL-1:0][W_BITWIDTH-1:0]             w_data_in;
+    logic signed [MAC_COL-1:0][W_BITWIDTH-1:0]             w_data_in;
 
     logic                                           ifmap_start_in;
     logic [MAC_ROW-1:0]                             ifmap_enable_in;
     logic [IFMAP_BITWIDTH-1:0]                      ifmap_data[MAC_ROW-1:0][IFMAP_NUM-1:0];
-    logic [MAC_ROW-1:0][IFMAP_BITWIDTH-1:0]         ifmap_data_in;
+    logic signed [MAC_ROW-1:0][IFMAP_BITWIDTH-1:0]         ifmap_data_in;
 
     logic [MAC_COL-1:0]                             ofmap_valid_out;
     logic [OFMAP_BITWIDTH-1:0]                      ofmap_data[MAC_COL-1:0][OFMAP_NUM-1:0];
     logic [MAC_COL-1:0][OFMAP_BITWIDTH-1:0]         ofmap_data_out;
-    logic [OFMAP_BITWIDTH-1:0]                      ref_ofmap_data[MAC_COL-1:0];
+    logic signed [OFMAP_BITWIDTH-1:0]                      ref_ofmap_data[MAC_COL-1:0];
 
 /////////////////////////////////////////////////////////////////////
 // Function
