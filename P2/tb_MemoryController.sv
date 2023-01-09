@@ -122,10 +122,10 @@ module tb_MemoryController;
 ************************************************************/
     initial begin
         $display("Loading text file.");
-        $readmemh("/path/to/data/weight_ref.hex", w_data_ref_init);
-        $readmemh("/path/to/data/ifmap_ref.hex", ifmap_data_ref_init);
-        $readmemh("/path/to/data/ofmap.hex", ofmap_data_init);
-        $readmemh("/path/to/data/ofmap_ref.hex", ofmap_data_ref_init);
+        $readmemh("C:\\EE495\\TPU\\P2\\data\\weight_ref.hex", w_data_ref_init);
+        $readmemh("C:\\EE495\\TPU\\P2\\data\\ifmap_ref.hex", ifmap_data_ref_init);
+        $readmemh("C:\\EE495\\TPU\\P2\\data\\ofmap.hex", ofmap_data_init);
+        $readmemh("C:\\EE495\\TPU\\P2\\data\\ofmap_ref.hex", ofmap_data_ref_init);
     end
 
 /************************************************************
@@ -248,7 +248,7 @@ module tb_MemoryController;
     #(
         .RAM_WIDTH                                      (W_BITWIDTH*MAC_COL),
         .RAM_ADDR_BITS                                  (W_ADDR_BIT),
-        .INIT_FILE_NAME                                 ("/path/to/data/weight.hex")
+        .INIT_FILE_NAME                                 ("C:\\EE495\\TPU\\P2\\data\\weight.hex")
     )
     weightRamInst
     (
@@ -263,7 +263,7 @@ module tb_MemoryController;
     #(
         .RAM_WIDTH                                      (IFMAP_BITWIDTH*MAC_ROW),
         .RAM_ADDR_BITS                                  (IFMAP_ADDR_BIT),
-        .INIT_FILE_NAME                                 ("/path/to/data/ifmap.hex")
+        .INIT_FILE_NAME                                 ("C:\\EE495\\TPU\\P2\\data\\ifmap.hex")
     )
     IfmapRamInst
     (
