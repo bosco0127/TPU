@@ -6,11 +6,17 @@ module Counter (
     input logic [31:0] MAX,
 
     output logic [31:0] Count,
-    output logic isMAX
+    output logic isMAX,
+    output logic isNext
 );
     logic [31:0] Count_1;
     logic [31:0] Enable_out;
     logic [31:0] Reset_out;
+
+    // Variable
+    always_ff @(posedge clk ) begin : Counter
+        Count <= Reset_out;
+    end
 
     // Plus 1 Adder
     always_comb begin : One_Adder
@@ -44,9 +50,9 @@ module Counter (
         end
     end
 
-    // Variable
-    always_ff @(posedge clk ) begin : Counter
-        Count <= Reset_out;
+    // isNext Register
+    always_ff @(posedge clk ) begin : isMAX_Reg
+        isNext <= isMAX;
     end
 
 endmodule
