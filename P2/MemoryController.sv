@@ -52,5 +52,25 @@ module MemoryController
 );
 
     // your code here
+    IFMapWeightController IFMapWeightController0 (
+        .clk (clk),
+        .rstn (rstn),
+        .start_in (start_in),
+        .w_prefetch_out (w_prefetch_out),
+        .w_addr_out (w_addr_out),
+        .w_read_en_out (w_read_en_out),
+        .ifmap_start_out (ifmap_start_out),
+        .ifmap_addr_out (ifmap_addr_out),
+        .ifmap_read_en_out (ifmap_read_en_out),
+        .mac_done_out (mac_done_out)
+    );
+
+    always_ff @( posedge clk ) begin : IFMapWeightController_testblock
+        if (mac_done_out) begin
+            ofmap_write_done_out <= 1'b1;
+        end else begin
+            ofmap_write_done_out <= 1'b0;
+        end
+    end
 
 endmodule
