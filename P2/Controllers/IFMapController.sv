@@ -68,14 +68,9 @@ module IFMapController
         end
     end
 
-    // ifmap_read_en_out Register /*******************NOT COMPLETED!!!*******************/
+    // ifmap_read_en_out Register
     always_ff @( posedge clk ) begin : ifmap_read_en_out_reg
         if (rstn) begin
-            /*if (ifmap_start_in) begin
-                ifmap_read_en_out <= 1'b1;
-            end else if (W_Controller_start) begin
-                ifmap_read_en_out <= 1'b0;
-            end*/
             ifmap_read_en_out <= (~W_Controller_start) & (ifmap_read_en_out & (~ifmap_start_in) | ifmap_start_in);
         end else begin
             ifmap_read_en_out <= 1'b0;

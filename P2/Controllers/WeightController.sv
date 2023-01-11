@@ -33,10 +33,7 @@ module WeightController
     input  logic                                                rstn,
 
     input  logic                                                w_start_in,
-/*
-    input  logic                                                I_CH_MAC_ROW_isMAX,
-    input  logic                                                I_CH_MAC_ROW_isNext,
-*/
+    
     input  logic [31:0]                                         O_CH_MAC_COL_count,
     input  logic [31:0]                                         I_CH_MAC_ROW_count,
     input  logic [31:0]                                         W_W_count,
@@ -48,20 +45,11 @@ module WeightController
     output logic                                                w_prefetch_out,
     output logic [W_ADDR_BIT-1:0]                               w_addr_out,
     output logic                                                w_read_en_out
-/*
-    output logic                                                W_H_isMAX,
-    output logic                                                W_H_isNext
-*/
 );
 
     // Wires
-    // isMAX & isNext Wires
-//    logic W_W_isMAX;
-//    logic W_W_isNext;
     // Counter Wires
     logic [31:0] MAC_COL_count;
-//    logic [31:0] W_W_count;
-//    logic [31:0] W_H_count;
 
     // w_prefetch_out Register
     always_ff @( posedge clk ) begin : w_prefetch_out_reg
@@ -72,14 +60,9 @@ module WeightController
         end
     end
 
-    // w_read_en_out Register /*******************NOT COMPLETED!!!*******************/
+    // w_read_en_out Register
     always_ff @( posedge clk ) begin : w_read_en_out_reg
         if (rstn) begin
-            /*if (w_start_in) begin
-                w_read_en_out <= 1'b1;
-            end else if (MAC_COL_isMAX) begin
-                w_read_en_out <= 1'b0;
-            end*/
             w_read_en_out <= (~MAC_COL_isMAX) & (w_read_en_out & (~w_start_in) | w_start_in);
         end else begin
             w_read_en_out <= 1'b0;
@@ -96,29 +79,7 @@ module WeightController
         .isMAX (MAC_COL_isMAX),
         .isNext (MAC_COL_isNext)
     );
-/*
-    // W_W Counter
-    Counter W_W_Counter (
-        .clk ((clk & ~rstn) | (rstn & I_CH_MAC_ROW_isNext)),
-        .rstn (rstn),
-        .enable (I_CH_MAC_ROW_isMAX),
-        .MAX (WEIGHT_WIDTH),
-        .Count (W_W_count),
-        .isMAX (W_W_isMAX),
-        .isNext (W_W_isNext)
-    );
 
-    // W_H Counter
-    Counter W_H_Counter (
-        .clk ((clk & ~rstn) | (rstn & W_W_isNext)),
-        .rstn (rstn),
-        .enable (W_W_isMAX),
-        .MAX (WEIGHT_HEIGHT),
-        .Count (W_H_count),
-        .isMAX (W_H_isMAX),
-        .isNext (W_H_isNext)
-    );
-*/
     always_comb begin : Address_Generator
         w_addr_out = MAC_COL_count*(OFMAP_CHANNEL_NUM/MAC_COL)
                    + O_CH_MAC_COL_count
@@ -126,16 +87,5 @@ module WeightController
                    + W_W_count*(OFMAP_CHANNEL_NUM/MAC_COL)*IFMAP_CHANNEL_NUM
                    + W_H_count*(OFMAP_CHANNEL_NUM/MAC_COL)*IFMAP_CHANNEL_NUM*WEIGHT_WIDTH;
     end
-
-    /*always @(posedge clk) begin
-        if (|W_W_count | |W_H_count) begin
-            $display("W_W_count = %d W_H_Count = %d",W_W_count,W_H_count);
-        end
-    end*/
-
-    /*always @(posedge clk) begin
-        @(posedge I_CH_MAC_ROW_isNext)
-        $display("W_W_Count = %1d w_addr_out = %1d",W_W_count,w_addr_out);
-    end*/
 
 endmodule

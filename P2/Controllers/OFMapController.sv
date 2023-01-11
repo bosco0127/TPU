@@ -78,6 +78,7 @@ module OFMapController
         .isNext (O_H_isNext)
     );
 
+    // O_CH_MAC_COL_Counter: Count numbers from 0 to (OFMAP_CHANNEL_NUM/MAC_COL - 1)
     Counter O_CH_MAC_COL_Counter (
         .clk ((clk & ~rstn) | (rstn & O_H_isNext)),
         .rstn (rstn),

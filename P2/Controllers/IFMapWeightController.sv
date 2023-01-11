@@ -97,6 +97,7 @@ module IFMapWeightController #(
         .ifmap_read_en_out (ifmap_read_en_out)
     );
 
+    // O_CH_MAC_COL_Counter: Count numbers from 0 to (OFMAP_CHANNEL_NUM/MAC_COL - 1)
     Counter O_CH_MAC_COL_Counter (
         .clk ((clk & ~rstn) | (rstn & O_H_isNext)),
         .rstn (rstn),
@@ -107,6 +108,7 @@ module IFMapWeightController #(
         .isNext (O_CH_MAC_COL_isNext)
     );
 
+    // I_CH_MAC_ROW_Counter: Count numbers from 0 to (IFMAP_CHANNEL_NUM/MAC_ROW - 1)
     Counter I_CH_MAC_ROW_Counter (
         .clk ((clk & ~rstn) | (rstn & O_CH_MAC_COL_isNext)),
         .rstn (rstn),
