@@ -63,7 +63,7 @@ module IFMapWeightController #(
     logic                  W_H_isNext;
 
     // Wire assginment
-    assign w_start_in = start_in | W_Controller_start;
+    assign w_start_in = (start_in | W_Controller_start) & ~mac_done_out;
     assign ifmap_start_in = MAC_COL_isMAX;
     assign mac_done_out = W_Controller_start & O_CH_MAC_COL_isMAX & I_CH_MAC_ROW_isMAX & W_W_isMAX & W_H_isMAX;
     
