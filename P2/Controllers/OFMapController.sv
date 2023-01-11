@@ -7,7 +7,7 @@
 
 `timescale 1 ns / 1 ps
 
-module MemoryController
+module OFMapController
 #(
     // logic parameter
     parameter MAC_ROW                                           = 16,
@@ -32,46 +32,67 @@ module MemoryController
     input  logic                                                clk,
     input  logic                                                rstn,
 
-    input  logic                                                start_in,
-
     input  logic                                                ofmap_ready_in,
-
-    output logic                                                w_prefetch_out,
-    output logic [W_ADDR_BIT-1:0]                               w_addr_out,
-    output logic                                                w_read_en_out,
-
-    output logic                                                ifmap_start_out,
-    output logic [IFMAP_ADDR_BIT-1:0]                           ifmap_addr_out,
-    output logic                                                ifmap_read_en_out,
-
-    output logic                                                mac_done_out,
 
     output logic [OFMAP_ADDR_BIT-1:0]                           ofmap_addr_out,
     output logic                                                ofmap_write_en_out,
     output logic                                                ofmap_write_done_out
 );
 
-    // your code here
-    IFMapWeightController IFMapWeightController0 (
+    // Wires
+    // isMAX & isNext wires
+    logic O_W_isMAX;
+    logic O_W_isNext;
+    logic O_H_isMAX;
+    logic O_H_isNext;
+    logic O_CH_MAC_COL_isMAX;
+    logic O_CH_MAC_COL_isNext;
+    // Counter wires
+    logic [31:0] O_W_count;
+    logic [31:0] O_H_count;
+    logic [31:0] O_CH_MAC_COL_count;
+
+    // Wire assignment
+    assign ofmap_write_en_out = ofmap_ready_in;
+    assign ofmap_write_done_out = O_H_isMAX & O_W_isMAX & O_CH_MAC_COL_isMAX;
+
+    // O_W Counter
+    Counter O_W_Counter (
         .clk (clk),
         .rstn (rstn),
-        .start_in (start_in),
-        .w_prefetch_out (w_prefetch_out),
-        .w_addr_out (w_addr_out),
-        .w_read_en_out (w_read_en_out),
-        .ifmap_start_out (ifmap_start_out),
-        .ifmap_addr_out (ifmap_addr_out),
-        .ifmap_read_en_out (ifmap_read_en_out),
-        .mac_done_out (mac_done_out)
+        .enable (ofmap_ready_in),
+        .MAX (OFMAP_WIDTH),
+        .Count (O_W_count),
+        .isMAX (O_W_isMAX),
+        .isNext (O_W_isNext)
     );
 
-    OFMapController OFMapController0 (
-        .clk (clk),
+    // O_H Counter
+    Counter O_H_Counter (
+        .clk ((clk & ~rstn) | (rstn & O_W_isNext)),
         .rstn (rstn),
-        .ofmap_ready_in (ofmap_ready_in),
-        .ofmap_addr_out (ofmap_addr_out),
-        .ofmap_write_en_out (ofmap_write_en_out),
-        .ofmap_write_done_out (ofmap_write_done_out)
+        .enable (O_W_isMAX),
+        .MAX (OFMAP_HEIGHT),
+        .Count (O_H_count),
+        .isMAX (O_H_isMAX),
+        .isNext (O_H_isNext)
     );
+
+    Counter O_CH_MAC_COL_Counter (
+        .clk ((clk & ~rstn) | (rstn & O_H_isNext)),
+        .rstn (rstn),
+        .enable (O_H_isMAX),
+        .MAX (OFMAP_CHANNEL_NUM/MAC_COL),
+        .Count (O_CH_MAC_COL_count),
+        .isMAX (O_CH_MAC_COL_isMAX),
+        .isNext (O_CH_MAC_COL_isNext)
+    );
+
+    // Address Generator
+    always_comb begin : Address_Generator
+        ofmap_addr_out = O_W_count*(OFMAP_CHANNEL_NUM/MAC_COL)
+                       + O_H_count*(OFMAP_CHANNEL_NUM/MAC_COL)*OFMAP_WIDTH
+                       + O_CH_MAC_COL_count;
+    end
 
 endmodule
