@@ -75,11 +75,12 @@ module WeightController
     // w_read_en_out Register /*******************NOT COMPLETED!!!*******************/
     always_ff @( posedge clk ) begin : w_read_en_out_reg
         if (rstn) begin
-            if (w_start_in) begin
+            /*if (w_start_in) begin
                 w_read_en_out <= 1'b1;
             end else if (MAC_COL_isMAX) begin
                 w_read_en_out <= 1'b0;
-            end
+            end*/
+            w_read_en_out <= (~MAC_COL_isMAX) & (w_read_en_out & (~w_start_in) | w_start_in);
         end else begin
             w_read_en_out <= 1'b0;
         end
