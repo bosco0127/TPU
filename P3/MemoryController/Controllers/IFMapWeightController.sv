@@ -1,3 +1,7 @@
+//`include "C:\\EE495\\TPU\\P3\\MemoryController\\Counters\\Counter.sv"
+`include "IFMapController.sv"
+`include "WeightController.sv"
+
 `timescale 1ns / 1ps
 
 module IFMapWeightController #(

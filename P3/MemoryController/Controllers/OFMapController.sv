@@ -4,6 +4,7 @@
 // Title: MemoryController.sv
 //
 /////////////////////////////////////////////////////////////////////
+//`include "C:\\EE495\\TPU\\P3\\MemoryController\\Counters\\Counter.sv"
 
 `timescale 1 ns / 1 ps
 

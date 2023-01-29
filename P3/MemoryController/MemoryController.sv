@@ -4,6 +4,9 @@
 // Title: MemoryController.sv
 //
 /////////////////////////////////////////////////////////////////////
+`include "C:\\EE495\\TPU\\P3\\MemoryController\\Counters\\Counter.sv"
+`include "Controllers\\IFMapWeightController.sv"
+`include "Controllers\\OFMapController.sv"
 
 `timescale 1 ns / 1 ps
 
