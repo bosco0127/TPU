@@ -97,11 +97,11 @@ module Systolic
 
     genvar i;
 
-    logic need_to_modify_1;
-    logic need_to_modify_2;
+    logic ready2finish_1;
+    logic ready2finish_2;
 
-    // Need To Modify
-    assign finish_out = need_to_modify_2;
+    // Finish
+    assign finish_out = ready2finish_2;
 
     // your code here
     assign MAC_write_en_neg = ~(|MAC_write_en);
@@ -190,17 +190,13 @@ module Systolic
     assign test_output_out                      = psum_data;
     assign psum_addr_mux                        = test_check_in ? test_output_addr_in : psum_addr;
 
-    always_comb begin
+    always_ff @( clk ) begin : finish_block
         if (rstn) begin
-            if(mac_done) begin
-                need_to_modify_1 = 1'b1;
-            end
-            if (need_to_modify_1 & ofmap_write_done) begin
-                need_to_modify_2 = 1'b1;
-            end            
+            ready2finish_1 <= ready2finish_1 | mac_done;
+            ready2finish_2 <= ready2finish_2 | (ready2finish_1 & ofmap_write_done);   
         end else begin
-            need_to_modify_1 = 1'b0;
-            need_to_modify_2 = 1'b0;
+            ready2finish_1 = 1'b0;
+            ready2finish_2 = 1'b0;
         end
     end
 
@@ -251,14 +247,7 @@ module Systolic
         .q                                      (psum_data)
     );
 
-
     int number=0;
-    /*always_ff @ (posedge clk) begin
-        //if (MAC_write_en_neg) begin
-            $display("****************");
-            $display("MAC_write_en_neg: %b",MAC_write_en_neg);
-        //end
-    end*/
 
     /****WEIGHT DEBUG****/
     `ifdef W_DEBUG
