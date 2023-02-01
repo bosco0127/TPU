@@ -1,4 +1,4 @@
-/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////// (),///////////
 //
 // EE488(G) Project 3
 // Title: tb_Systolic.sv
@@ -29,10 +29,10 @@ module tb_Systolic;
     localparam OFMAP_HEIGHT                     = 14;
     localparam OFMAP_NUM                        = 784;
     // initialization data path
-    localparam IFMAP_DATA_PATH                  = "/path/to/data/ifmap.hex";
-    localparam WEIGHT_DATA_PATH                 = "/path/to/data/weight.hex";
-    localparam INIT_OFMAP_DATA_PATH             = "/path/to/data/init_ofmap.hex";
-    localparam OFMAP_DATA_PATH                  = "/path/to/data/ofmap.hex";
+    localparam IFMAP_DATA_PATH                  = "C:\\EE495\\TPU\\P3\\data\\ifmap.hex";
+    localparam WEIGHT_DATA_PATH                 = "C:\\EE495\\TPU\\P3\\data\\weight.hex";
+    localparam INIT_OFMAP_DATA_PATH             = "C:\\EE495\\TPU\\P3\\data\\init_ofmap.hex";
+    localparam OFMAP_DATA_PATH                  = "C:\\EE495\\TPU\\P3\\data\\ofmap.hex";
 
     const time CLK_PERIOD                       = 10ns;
     const time CLK_HALF_PERIOD                  = CLK_PERIOD / 2;
@@ -69,7 +69,7 @@ module tb_Systolic;
 
     initial begin
         error                                   = 0;
-        test_output_addr_in                     = '0;
+        test_output_addr_in                     = -1;
         test_check_in                           = '0;
     end
 
@@ -133,7 +133,7 @@ module tb_Systolic;
     end
 
     always @(posedge clk) begin
-        ref_num                                 <= test_output_addr_in;
+        ref_num                                 <= test_output_addr_in + 1;
         comparing                               <= test_check_in;
     end
 

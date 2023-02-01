@@ -1,4 +1,6 @@
 // Combine 4 x o_mem to ofmap_mem
+`include "RWRam.sv"
+
 module ofmap_mem
 (
    input  logic                                clock,
@@ -17,7 +19,7 @@ module ofmap_mem
         q                                       = o_q;
     end
 
-    o_mem_0 ofmap_mem0
+    RWRam ofmap_mem0
     (
         .clock                                  (clock),            
         .data                                   (o_data[0]),            
@@ -27,7 +29,7 @@ module ofmap_mem
         .q                                      (o_q[0])        
     );
 
-    o_mem_1 ofmap_mem1
+    RWRam ofmap_mem1
     (
         .clock                                  (clock),            
         .data                                   (o_data[1]),            
@@ -37,7 +39,7 @@ module ofmap_mem
         .q                                      (o_q[1])        
     );
 
-    o_mem_2 ofmap_mem2
+    RWRam ofmap_mem2
     (
         .clock                                  (clock),            
         .data                                   (o_data[2]),            
@@ -47,7 +49,7 @@ module ofmap_mem
         .q                                      (o_q[2])        
     );
 
-    o_mem_3 ofmap_mem3
+    RWRam ofmap_mem3
     (
         .clock                                  (clock),            
         .data                                   (o_data[3]),            

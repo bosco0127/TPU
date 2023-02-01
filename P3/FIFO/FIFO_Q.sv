@@ -28,7 +28,7 @@ module FIFO_Q
             end
         end
         else begin
-            for (i = 0; i < FIFO_DEPTH; i++) begin
+            for (i = FIFO_DEPTH-1; i >= 0; i--) begin
                 if (i == 0) begin
                     mem[i] <= {enable_in,data_in};
                 end else begin

@@ -6,6 +6,9 @@
 /////////////////////////////////////////////////////////////////////
 `include "MAC.sv"
 
+//`define DEBUG
+//`define DEBUG_BY_VALUE
+
 `timescale 1 ns / 1 ps
 
 module MacArray
@@ -139,7 +142,7 @@ module MacArray
     endgenerate
 
     int i,j;
-
+    `ifdef DEBUG
     always_ff @ (posedge clk) begin
         if (|ifmap_enable_in | |ofmap_valid_out) begin
             $display("***********************************");
@@ -156,5 +159,37 @@ module MacArray
             end
         end
     end
+    `endif
+
+    `ifdef DEBUG_BY_VALUE
+    always_ff @ (posedge clk) begin
+        if (w_enable_in |ifmap_enable_in | |ofmap_valid_out) begin
+            $display("***WEIGHT***********************************************************************************************************************************");
+            for (i = 0; i < MAC_ROW; i++) begin
+                $display("%8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x",
+                w_internal_wire[i][0],w_internal_wire[i][1],w_internal_wire[i][2],w_internal_wire[i][3]
+                ,w_internal_wire[i][4],w_internal_wire[i][5],w_internal_wire[i][6],w_internal_wire[i][7]
+                ,w_internal_wire[i][8],w_internal_wire[i][9],w_internal_wire[i][10],w_internal_wire[i][11]
+                ,w_internal_wire[i][12],w_internal_wire[i][13],w_internal_wire[i][14],w_internal_wire[i][15]);
+            end
+            $display("***IFMAP************************************************************************************************************************************");
+            for (i = 0; i < MAC_ROW; i++) begin
+                $display("%8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x",
+                ifmap_internal_wire[i][0],ifmap_internal_wire[i][1],ifmap_internal_wire[i][2],ifmap_internal_wire[i][3]
+                ,ifmap_internal_wire[i][4],ifmap_internal_wire[i][5],ifmap_internal_wire[i][6],ifmap_internal_wire[i][7]
+                ,ifmap_internal_wire[i][8],ifmap_internal_wire[i][9],ifmap_internal_wire[i][10],ifmap_internal_wire[i][11]
+                ,ifmap_internal_wire[i][12],ifmap_internal_wire[i][13],ifmap_internal_wire[i][14],ifmap_internal_wire[i][15]);
+            end
+            $display("***OFMAP************************************************************************************************************************************");
+            for (i = 0; i < MAC_ROW; i++) begin
+                $display("%8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x %8x",
+                ofmap_internal_wire[i][0],ofmap_internal_wire[i][1],ofmap_internal_wire[i][2],ofmap_internal_wire[i][3]
+                ,ofmap_internal_wire[i][4],ofmap_internal_wire[i][5],ofmap_internal_wire[i][6],ofmap_internal_wire[i][7]
+                ,ofmap_internal_wire[i][8],ofmap_internal_wire[i][9],ofmap_internal_wire[i][10],ofmap_internal_wire[i][11]
+                ,ofmap_internal_wire[i][12],ofmap_internal_wire[i][13],ofmap_internal_wire[i][14],ofmap_internal_wire[i][15]);
+            end
+        end
+    end
+    `endif
 
 endmodule

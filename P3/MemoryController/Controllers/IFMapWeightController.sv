@@ -29,6 +29,7 @@ module IFMapWeightController #(
     input  logic                                                rstn,
 
     input  logic                                                start_in,
+    input  logic                                                MAC_write_en_neg,
 
     output logic                                                w_prefetch_out,
     output logic [W_ADDR_BIT-1:0]                               w_addr_out,
@@ -43,6 +44,8 @@ module IFMapWeightController #(
 
     /************Weight Control Logics************/
     logic                  w_start_in;
+    logic                  w_MAC_valid1;
+    logic                  w_MAC_valid2;
     logic                  MAC_COL_isMAX;
     logic                  MAC_COL_isNext;
 
@@ -67,9 +70,25 @@ module IFMapWeightController #(
     logic                  W_H_isNext;
 
     // Wire assginment
-    assign w_start_in = (start_in | W_Controller_start) & ~mac_done_out;
+    assign w_start_in = (start_in | w_MAC_valid2) & ~mac_done_out;
     assign ifmap_start_in = MAC_COL_isMAX;
     assign mac_done_out = W_Controller_start & O_CH_MAC_COL_isMAX & I_CH_MAC_ROW_isMAX & W_W_isMAX & W_H_isMAX;
+
+    always_ff @( posedge clk ) begin : Q1
+        if (rstn) begin
+            w_MAC_valid1 <= ((~w_MAC_valid1 & W_Controller_start) | (w_MAC_valid1 & ~W_Controller_start)) & ~w_MAC_valid2;
+        end else begin
+            w_MAC_valid1 <= 1'b0;
+        end
+    end
+
+    always_ff @( posedge clk ) begin : Q2
+        if (rstn) begin
+            w_MAC_valid2 <= ~w_MAC_valid2 & w_MAC_valid1 & MAC_write_en_neg;
+        end else begin
+            w_MAC_valid2 <= 1'b0;
+        end
+    end
     
     WeightController WeightController0 (
         .clk (clk),

@@ -36,6 +36,7 @@ module MemoryController
     input  logic                                                rstn,
 
     input  logic                                                start_in,
+    input  logic                                                MAC_write_en_neg,
 
     input  logic                                                ofmap_ready_in,
 
@@ -59,6 +60,7 @@ module MemoryController
         .clk (clk),
         .rstn (rstn),
         .start_in (start_in),
+        .MAC_write_en_neg (MAC_write_en_neg),
         .w_prefetch_out (w_prefetch_out),
         .w_addr_out (w_addr_out),
         .w_read_en_out (w_read_en_out),
